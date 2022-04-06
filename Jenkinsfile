@@ -4,7 +4,7 @@ pipeline{
 
 
   environment{
-    IMAGE_NAME = "dezy433/spartan_project_vagrant-main:3." + "$BUILD_NUMBER"
+    IMAGE_NAME = "dez433/spartan_project_vagrant-main:3." + "$BUILD_NUMBER"
     DOCKER_CREDENTIALS = 'docker_hub_cred'
   }
   stages{
