@@ -1,5 +1,4 @@
 pipeline{
-
   agent any
 
 
@@ -33,7 +32,7 @@ pipeline{
         steps{
           script{
             sh'''
-              docker run $IMAGE_NAME pytest
+              docker run --rm -v $IMAGE_NAME pytest
             '''
           }
         }
