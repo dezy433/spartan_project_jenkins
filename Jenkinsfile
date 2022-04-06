@@ -13,14 +13,14 @@ pipeline{
         steps {
           checkout([
               $class: 'GitSCM', branches: [[name: '*/master']],
-              serRemoteConfigs: [[
+              userRemoteConfigs: [[
                 url: 'git@github.com:dezy433/spartan_project_vagrant-main.git',
                 credentialsId: 'ssh_git_cred'
               ]]
             ])
         }
       }
-    }
+
     stage('Build Docker Image'){
       steps{
           script {
@@ -32,12 +32,18 @@ pipeline{
         steps{
           script{
             sh'''
-              docker run --rm -v $IMAGE_NAME pytest
+            docker run --rm -v $PWD/test-results:/reports --workdir /app $IMAGE_NAME pytest -v --junitxml=/reports/results.xm
+
             '''
           }
         }
-      }
 
+      post{
+        always{
+          junnit testResult '**/test-results/*.xml'
+        }
+      }
+    }
   stage('Push to Docker Hub'){
     steps {
       script {
