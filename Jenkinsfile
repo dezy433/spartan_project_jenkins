@@ -3,6 +3,7 @@ pipeline{
   agent any
   environment{
     IMAGE_NAME = "dezy433/spartan_project_vagrant-main:3." + "$BUILD_NUMBER"
+    DOCKER_CREDENTIALS = 'docker_hub_cred'
   }
   stages{
     stage('Cloning the project from Github'){
@@ -22,7 +23,7 @@ pipeline{
         stage('Push to Docker Hub'){
           steps{
             script{
-              docker.withRegistry('', 'docker_hub_cred'){
+              docker.withRegistry('', 'DOCKER_CREDENTIALS'){
                 DOCKER_IMAGE.push()
               }
             }
