@@ -13,9 +13,17 @@ pipeline{
       stage('Build Docker Image'){
         steps{
             script {
-              docker.build 'dezy433/spartan_project_vagrant-main'
+              DOCKER_IMAGE = docker.build 'dezy433/spartan_project_vagrant-main'
             }
           }
         }
+        stage('Push to Docker Hub')
+          steps{
+            script{
+              docker.withRegistry('','docker_hub_cred'){
+                DOCKER_IMAGE.push()
+              }
+            }
+          }
       }
     }
