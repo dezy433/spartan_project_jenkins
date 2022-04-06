@@ -7,9 +7,11 @@ pipeline{
       steps{
         git branch: 'master',
         url: 'https://github.com/dezy433/spartan_project_vagrant-main.git'
+        }
+      }
 
-        stage('Build Docker Image'){
-          steps{
+      stage('Build Docker Image'){
+        steps{
             script {
               docker.build 'dezy433/spartan_project_vagrant-main'
             }
@@ -17,5 +19,3 @@ pipeline{
         }
       }
     }
-  }
-}
