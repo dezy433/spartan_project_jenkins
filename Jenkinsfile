@@ -22,20 +22,27 @@ pipeline{
           }
         }
       }
-      stage('Push to Docker Hub'){
-        steps{
-          script{
-            docker.withRegistry('', DOCKER_CREDENTIALS){
-              DOCKER_IMAGE.push()
-              }
-            }
-          }
-        }
-
-          stage('Removing the Docker image'){
-            steps{
-              sh "docker rmi $IMAGE_NAME"
-            }
-          }
+      stages {
+  stage('Cloning the project from GitHub'){
+    steps {
+      git branch: 'master',
+      url: 'https://github.com/dezy433/spartan_project_vagrant-main.git'
+    }
+  }
+  stage('Push to Docker Hub'){
+    steps {
+      script {
+        docker.withRegistry('', DOCKER_CREDENTIALS){
+          DOCKER_IMAGE.push()
         }
       }
+    }
+  }
+
+  stage('Removing the Docker Image'){
+    steps {
+      sh "docker rmi $IMAGE_NAME"
+      }
+    }
+  }
+}
