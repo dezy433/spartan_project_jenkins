@@ -33,7 +33,7 @@ pipeline{
         steps{
           script{
             sh'''
-              docker run $IMAGE_NAME
+              docker run $IMAGE_NAME pytest
             '''
           }
         }
@@ -55,4 +55,4 @@ pipeline{
         }
       }
     }
-}
+  }
