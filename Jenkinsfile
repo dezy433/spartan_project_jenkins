@@ -26,8 +26,7 @@ pipeline{
                 DOCKER_IMAGE.push()
               }
             }
-          }
-      }
-    }
-  }
-}
+         }
+       }
+     }
+   }
