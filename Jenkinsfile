@@ -23,12 +23,17 @@ pipeline{
         }
       }
       stages {
-  stage('Cloning the project from GitHub'){
-    steps {
-      git branch: 'master',
-      url: 'https://github.com/dezy433/spartan_project_vagrant-main.git'
-    }
-  }
+        stage('Cloning the project from GitHub'){
+          steps {
+            checkout([
+                $class: 'GitSCM', branches: [[name: '*/main']],
+                serRemoteConfigs: [[
+                  url: 'git@github.com:dezy433/spartan_project_vagrant-main.git',
+                  credentialsId: 'ssh_git_cred'
+                ]]
+              ])
+          }
+        }
   stage('Push to Docker Hub'){
     steps {
       script {
