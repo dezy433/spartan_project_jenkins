@@ -13,7 +13,7 @@ pipeline{
       stage('Cloning the project from GitHub'){
         steps {
           checkout([
-              $class: 'GitSCM', branches: [[name: '*/main']],
+              $class: 'GitSCM', branches: [[name: '*/master']],
               serRemoteConfigs: [[
                 url: 'git@github.com:dezy433/spartan_project_vagrant-main.git',
                 credentialsId: 'ssh_git_cred'
@@ -55,4 +55,4 @@ pipeline{
         }
       }
     }
-  
+  }
