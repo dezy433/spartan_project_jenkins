@@ -5,7 +5,7 @@ pipeline{
   environment{
     IMAGE_NAME = "dez433/spartan_project_jenkins:3." + "$BUILD_NUMBER"
     DOCKER_CREDENTIALS = 'docker_hub_cred'
-  }
+   }
 
 
   stages {
@@ -33,6 +33,7 @@ pipeline{
         script{
           sh'''
             docker run --rm -v $PWD/test-results:/reports --workdir /app $IMAGE_NAME pytest -v --junitxml=/reports/results.xml
+            ls $PWD/test-results
             '''
           }
         }
