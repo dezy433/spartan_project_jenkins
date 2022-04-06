@@ -6,6 +6,7 @@ import json
 
 with open("/database.config")as config_file:
     database_url = config_file.read().strip()
+    
 while True:
     try:
         client = MongoClient("mongodb://db.deren.devops106:27017")
