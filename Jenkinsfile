@@ -1,7 +1,9 @@
 pipeline{
 
   agent any
-
+  environment{
+    IMAGE_NAME = "dezy433/spartan_project_vagrant-main:" + "$BUILD_NUMBER"
+  }
   stages{
     stage('Cloning the project from Github'){
       steps{
@@ -13,8 +15,7 @@ pipeline{
       stage('Build Docker Image'){
         steps{
             script {
-              DOCKER_IMAGE = docker.build 'dezy433/spartan_project_vagrant-main'
-            }
+              DOCKER_IMAGE = docker.build IMAGE_NAME
           }
         }
         stage('Push to Docker Hub'){
