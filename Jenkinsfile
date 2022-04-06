@@ -7,14 +7,6 @@ pipeline{
     IMAGE_NAME = "dez433/spartan_project_vagrant-main:3." + "$BUILD_NUMBER"
     DOCKER_CREDENTIALS = 'docker_hub_cred'
   }
-  stages{
-    stage('Cloning the project from Github'){
-      steps{
-        git branch: 'master',
-        url: 'https://github.com/dezy433/spartan_project_vagrant-main.git'
-        }
-      }
-    }
 
 
   stages {
@@ -37,6 +29,15 @@ pipeline{
           }
         }
       }
+      stage('Testing the code'){
+        steps{
+          script{
+            sh'''
+              docker run $IMAGE_NAME
+            '''
+          }
+        }
+      }
 
   stage('Push to Docker Hub'){
     steps {
@@ -54,3 +55,4 @@ pipeline{
         }
       }
     }
+}
