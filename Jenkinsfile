@@ -22,15 +22,15 @@ pipeline{
           }
         }
       }
-        stage('Push to Docker Hub'){
-          steps{
-            script{
-              docker.withRegistry('', DOCKER_CREDENTIALS){
-                DOCKER_IMAGE.push()
-                }
+      stage('Push to Docker Hub'){
+        steps{
+          script{
+            docker.withRegistry('', DOCKER_CREDENTIALS){
+              DOCKER_IMAGE.push()
               }
             }
           }
+        }
 
           stage('Removing the Docker image'){
             steps{
