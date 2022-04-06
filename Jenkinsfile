@@ -25,10 +25,14 @@ pipeline{
             script{
               docker.withRegistry('', 'DOCKER_CREDENTIALS'){
                 DOCKER_IMAGE.push()
+                }
               }
             }
-         }
-       }
-
-     }
-   }
+          }
+          stage('Removing the Docker image'){
+            steps{
+              sh "docker rmi $IMAGE_NAME"
+            }
+          }
+        }
+      }
