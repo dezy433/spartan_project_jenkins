@@ -11,7 +11,7 @@ pipeline{
         stage('Build Docker Image'){
           steps{
             script {
-              docker.build 'dez433/spartan'
+              docker.build 'dezy433/spartan_project_vagrant-main'
             }
           }
         }
